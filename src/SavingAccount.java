@@ -1,37 +1,49 @@
-import java.util.Random;
+
 
 public class SavingAccount {
     String accountHolderName;
+    long accountNumber;
     String accountStatus;
-    int accountBalance;
+    double accountBalance;
 
     public void savingAccount(String accountHolderName, String accountStatus, int accountBalance) {
         this.accountHolderName = accountHolderName;
         this.accountStatus = accountStatus;
         this.accountBalance = accountBalance;
     }
-    public long accountNumber() {
-        Random obj = new Random();
-        long number = 0;
-         long accountNumber = obj.nextLong(100000000000l);
-        System.out.println(number);
-        return number;
-    }
-    public double withdrawlCash(int amount){
-
-        return accountBalance - amount;
-
+    public long accNumberGen(){
+        accountNumber = (long) (Math.random()*1000000000000L);
+        return accountNumber;
     }
     public double retriveBalance(){
+
         return accountBalance;
 
     }
     public double depositBalance(int amount){
-        return accountBalance+ amount;
+        accountBalance+= amount;
+        return accountBalance;
 
     }
-    public double fundTransfer(int amount){
-        return (accountBalance- amount);
+    public double withdrawlCash(int amount){
+        if (accountBalance > amount ){
+            accountBalance -= amount;
+        }else {
+            System.out.println("Withdrawl  failed due to insufficient funds");
+        }
+
+        return accountBalance;
     }
+
+
+    public double fundTransfer(int amount){
+        if (accountBalance > amount ){
+            accountBalance-= amount;
+        }else {
+            System.out.println("Transfer failed due to insufficient funds");
+        }
+        return accountBalance;
+    }
+
 }
 
